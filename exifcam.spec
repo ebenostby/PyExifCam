@@ -1,0 +1,70 @@
+# -*- mode: python ; coding: utf-8 -*-
+
+
+block_cipher = None
+
+
+a = Analysis(
+    ['exifcam.py'],
+    pathex=[],
+    binaries=[('exifcam/exiftool', '.'), ('exifcam/lib', 'lib')],
+    datas=[],
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='exifcam',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console=False,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='exifcam',
+)
+app = BUNDLE(
+    coll,
+    icon='images/exifcam.icns',
+    name='exifcam.app',
+    # Register custom protocol handler and custom file extension
+    info_plist={
+        'CFBundleURLTypes': [{
+            'CFBundleURLName': 'ExifCamUrl',
+            'CFBundleTypeRole': 'Editor',
+            'CFBundleURLSchemes': ['tiff','tif','jpeg','jpg','png'],
+        }],
+        'CFBundleDocumentTypes': [{
+            'CFBundleTypeName': 'ExifCamImages',
+            'CFBundleTypeExtensions': [
+                'tiff','tif','jpeg','jpg','png'
+            ],
+            'CFBundleTypeRole': "Editor",
+         }],
+    }
+)
