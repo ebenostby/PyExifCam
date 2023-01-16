@@ -213,11 +213,8 @@ class Interactive:
 				raise ValueError
 		return (hasLens, vals)
 	def fileRequest(self, files):
-		if (self.justStarted):
-			self.setDesiredFiles(files)
-			self.textbox['text'] = "Unwritten files to be updated: %s"%"\n".join(files)
-		else:
-			self.openFilesFromSomeplace(files)
+		self.setDesiredFiles(files)
+		self.textbox['text'] = "Unwritten files to be updated: %s%s"%("\n".join(files[:9]), "..." if len(files)>9 else "")
 	def openFiles(self):
 		self.openFilesFromSomeplace(None)
 	def saveFiles(self):
@@ -272,7 +269,8 @@ class Interactive:
 			showerror(title="exiftool results", message="Error %d\n %s"%( exifresults.returncode, exifresults.stderr))
 			self.textbox['text']="Errors when updating %s"% ('\n'.join(givenFiles))
 		else:
-			self.textbox['text']="files updated %s"%("\n".join(givenFiles))
+			self.textbox['text']="All files updated: %s%s"%("\n".join(givenFiles[:9]), "..." if len(givenFiles)>9 else "")
+
 			
 	def select_record(self, e):
 		camInfoRow=self.my_tree.focus()

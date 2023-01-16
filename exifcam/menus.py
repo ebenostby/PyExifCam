@@ -27,7 +27,7 @@ def BuildMenus(root, inter, saveablefiles):
 	if (saveablefiles):
 		file_menu.add_command(label="Save", command=inter.saveFiles, accelerator="Command-S")
 		root.bind_all("<Command-s>", lambda event:inter.saveFiles())
-	file_menu.add_command(label="Open-and-save", command=inter.saveFiles, accelerator="Command-O")
+	file_menu.add_command(label="Open-and-save", command=inter.openFiles, accelerator="Command-O")
 	root.bind_all("<Command-o>", lambda event:inter.openFiles())
 
 	#Search Menu
