@@ -7,6 +7,13 @@ What it is
  kept in a sqlite file and can be edited within the ExifCam tool. Updating camera and lens information is done via an included copy of exiftool, which stores the
  information as exif tags. Currently, jpg, tif, png files are supported.
  <h2>
+ Downloading ExifCam
+ </h2>
+ The app is saved as a zip file (at present) in the repository in a directory called <i>dist</i>
+ Copy this and double-click on it to unzip (decompress) it. 
+ I suspect you'll have to set security permissions on the Mac to let it run.
+ Let me know how that works for you.
+ <h2>
  Porting your camera information from AnalogExif
  </h2>
  On initial use, or whenever ExifCam doesn't find its camera database, it will look for and attempt to open an AnalogExif database. If it finds one, it will scan it and
