@@ -7,12 +7,22 @@ What it is
  kept in a sqlite file and can be edited within the ExifCam tool. Updating camera and lens information is done via an included copy of exiftool, which stores the
  information as exif tags. Currently, jpg, tif, png files are supported.
  <h2>
+<<<<<<< HEAD
  Downloading ExifCam
  </h2>
  The app is saved as a zip file (at present) in the repository in a directory called <i>dist</i>
  Copy this and double-click on it to unzip (decompress) it. 
  I suspect you'll have to set security permissions on the Mac to let it run.
  Let me know how that works for you.
+=======
+ Installing exifcam
+ </h2>
+ There is an app file in the dist directory, stored as a zip file. Download this zip file, uncompress it, and move the resulting app file into your
+ Applications directory or whereever you might want it.
+ If you don't already have python3.9 or better installed, you will need that. 
+ <a href="https://www.freecodecamp.org/news/python-version-on-mac-update/"> Here are some instructions on installing python 3.9 using homebrew.</a>
+ Start exifcam by double-clicking on its icon, or by dragging-and-dropping image files onto the icon.
+>>>>>>> 3b74225c9add49b426d9078f3ecfaaf8a7cb529a
  <h2>
  Porting your camera information from AnalogExif
  </h2>
