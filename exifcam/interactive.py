@@ -261,7 +261,7 @@ class Interactive:
 			args.extend(["-overwrite_original_in_place"])
 		args.extend([ "-Make="+vals[1], "-Model="+vals[2]])
 		if (hasLens):
-			args.extend(["-LensMake="+vals[3], "-LensModel="+vals[4], "-LensInfo=%f %f %f %f"%(fl, fl, ap, ap)])
+			args.extend(["-LensMake="+vals[3], "-LensModel=%s %.0f f%.1f"%(vals[4],fl,ap), "-LensInfo=%f %f %f %f"%(fl, fl, ap, ap)])
 		for i in givenFiles:
 			args.extend([i])
 		exifresults = subprocess.run(args, text=True, capture_output=True)
