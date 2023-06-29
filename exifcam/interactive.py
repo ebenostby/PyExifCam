@@ -52,7 +52,7 @@ class Interactive:
 				raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), "exiftool")
 
 		self.tree_frame = tkinter.Frame(self.root)
-		self.tree_frame.pack(pady=10)
+		self.tree_frame.pack(pady=12)
 
 		# Create a Treeview Scrollbar
 		self.tree_scroll = tkinter.Scrollbar(self.tree_frame)
@@ -223,6 +223,7 @@ class Interactive:
 		try:
 			(hasLens, vals)=self.getCurrentRowInfo()
 		except:
+			showerror(title="exiftool", message="no current row")
 			return
 		self.justStarted = False
 		initialdir = self.db.getstate("dir")
@@ -281,7 +282,7 @@ class Interactive:
 		lastparent=''
 		self.count=0
 		for cam in cams:
-				camparent=self.my_tree.insert(parent="", index='end', iid=self.iidFromCamLens(cam[0], 0), text='', values=(cam[0], cam[1], cam[2]))
+				camparent=self.my_tree.insert(parent="", index='end', iid=self.iidFromCamLens(cam[0], 0), text='', values=(cam[0], str(cam[1]), str(cam[2])))
 				self.count += 1
 				for len in lens:
 					if (len[1] == cam[0]):
@@ -289,13 +290,13 @@ class Interactive:
 						self.count += 1
 	def update_database_from_row(self, row):
 		# do different things depending on whether this is a lens row or a camera row.
-		
 		thisitem = self.my_tree.item(row)
 		vals = thisitem['values']
 		if (self.rowIsLens(row)):
 			self.db.updateLens(vals[0], vals[3], vals[4], vals[5], vals[6])
 		else:
-			self.db.updateCamera(vals[0], vals[1], vals[2])
+			self.db.updateCamera(vals[0], str(vals[1]), str(vals[2]))
+					
 #	
 #		for record in records:
 #				self.my_tree.insert(parent="", index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6]))

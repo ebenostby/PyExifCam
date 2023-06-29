@@ -27,7 +27,7 @@ dbname = "cam.db"
 def main():
 	root = tkinter.Tk()
 	root.title('camera exif tool')
-	root.geometry("1000x550")
+	root.geometry("1000x600")
 	
 
 	myappsup = Path(appsup).expanduser()

@@ -95,15 +95,14 @@ class Db:
 		self.lens = lens
 	def updateCamera(self, id, maker, model):
 		conn = sqlite3.connect(self.name)
-		if ((maker == None) or self.nonblanks.search(maker) == None):
+		if ((maker == None) or self.nonblanks.search(str(maker)) == None):
 			maker = "Unknown"
-		if ((model == None) or self.nonblanks.search(model) == None):
+		if ((model == None) or self.nonblanks.search(str(model)) == None):
 			model = "Unknown"
 		c = conn.cursor()
-		c.execute("""UPDATE cameras SET maker = ?, model=? WHERE id =? """, (maker, model, id))
+		c.execute("""UPDATE cameras SET maker = ?, model=? WHERE id =? """, (str(maker), str(model), id))
 		conn.commit()
 		conn.close()
-		print ("update cam entry", id, maker, model)
 	def deleteCamera(self, id):
 		conn = sqlite3.connect(self.name)
 		c = conn.cursor()
@@ -125,11 +124,10 @@ class Db:
 			maker = "Unknown"
 		if ((model == None) or self.nonblanks.search(model) == None):
 			model = "Unknown"
-		c.execute("""INSERT INTO lenses (cameraid, maker, model,  length, aperture) VALUES (?, ?, ?, ?, ?)""", (cameraid, maker, model, length, aperture))
+		c.execute("""INSERT INTO lenses (cameraid, str(maker), str(model),  length, aperture) VALUES (?, ?, ?, ?, ?)""", (cameraid, maker, model, length, aperture))
 		lastrowid = c.lastrowid
 		conn.commit()
 		conn.close()
-		print ("new lens", lastrowid, cameraid, maker, model, length, aperture)
 		return lastrowid
 		
 	def updateLens(self, id, maker, model, length, aperture):
@@ -139,10 +137,9 @@ class Db:
 		if ((model == None) or self.nonblanks.search(model) == None):
 			model = "Unknown"
 		c = conn.cursor()
-		c.execute("""UPDATE lenses SET maker = ?, model = ?,  length = ?, aperture = ? where id = ?""", (maker, model, length, aperture, id))
+		c.execute("""UPDATE lenses SET maker = ?, model = ?,  length = ?, aperture = ? where id = ?""", (str(maker), str(model), length, aperture, id))
 		conn.commit()
 		conn.close()
-		print ("update lens entry ", id, maker, model, length, aperture)
 		
 	def newCamera(self, maker, model):
 		conn = sqlite3.connect(self.name)
@@ -151,7 +148,7 @@ class Db:
 		if ((model == None) or self.nonblanks.search(model) == None):
 			model = "Unknown"
 		c = conn.cursor()
-		c.execute("""INSERT INTO cameras (maker, model) VALUES (?, ?)""", (maker, model))
+		c.execute("""INSERT INTO cameras (maker, model) VALUES (?, ?)""", (str(maker), str(model)))
 		lastrowid = c.lastrowid
 		conn.commit()
 		conn.close()
