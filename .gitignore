@@ -1,3 +1,7 @@
 
 .DS_Store
 exifcam/.DS_Store
+exifcam/PyExifCam/.DS_Store
+exifcam/PyExifCam/build/
+exifcam/PyExifCam/dist/exifcam/
+exifcam/PyExifCam/dist/exifcam.app/
