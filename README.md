@@ -13,7 +13,7 @@ What it is
  Copy this and double-click on it to unzip (decompress) it. 
  I suspect you'll have to set security permissions on the Mac to let it run.
  Let me know how that works for you.
-=======
+<h2>
  Installing exifcam
  </h2>
  There is an app file in the dist directory, stored as a zip file. Download this zip file, uncompress it, and move the resulting app file into your
