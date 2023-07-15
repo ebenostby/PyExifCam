@@ -124,7 +124,7 @@ class Db:
 			maker = "Unknown"
 		if ((model == None) or self.nonblanks.search(model) == None):
 			model = "Unknown"
-		c.execute("""INSERT INTO lenses (cameraid, str(maker), str(model),  length, aperture) VALUES (?, ?, ?, ?, ?)""", (cameraid, maker, model, length, aperture))
+		c.execute("""INSERT INTO lenses (cameraid, maker, model,  length, aperture) VALUES (?, ?, ?, ?, ?)""", (cameraid, str(maker), str(model), length, aperture))
 		lastrowid = c.lastrowid
 		conn.commit()
 		conn.close()
