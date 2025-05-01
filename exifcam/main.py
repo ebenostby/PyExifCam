@@ -12,13 +12,14 @@
 #   limitations under the License. 
 
 
-import tkinter
 from .db import Db
 import os
 from .olddb import OldDb
 from .interactive import Interactive
 from .menus import BuildMenus
 from pathlib import Path
+import tkinter
+
 from tkinter.messagebox import showerror
 
 appsup = "~/Library/Application Support/ExifCam"
@@ -54,5 +55,6 @@ def main():
 			lens = db.getLens()
 	
 	inter.insert(cams, lens)
+	inter.initial_sort_by_maker()
 	inter.setInitialFocus(db.getstate("selected"))
 	root.mainloop()

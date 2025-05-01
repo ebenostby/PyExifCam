@@ -296,6 +296,9 @@ class Interactive:
 			self.db.updateLens(vals[0], vals[3], vals[4], vals[5], vals[6])
 		else:
 			self.db.updateCamera(vals[0], str(vals[1]), str(vals[2]))
+	def initial_sort_by_maker(self):
+		treeview_sort_column(self.my_tree, "Maker", 0)
+		
 					
 #	
 #		for record in records:
