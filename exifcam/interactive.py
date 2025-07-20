@@ -39,7 +39,7 @@ class Interactive:
 	def __init__(self, root, db):
 		self.db = db
 		self.root = root
-		self.desiredFiles = None
+		self.desiredFiles = []
 		self.justStarted = True
 		mypath = os.path.abspath(os.path.dirname(__file__))
 		if (os.path.exists(mypath+"/exiftool")):
@@ -152,6 +152,8 @@ class Interactive:
 		return column > 2
 	def setDesiredFiles(self, desired):
 		self.desiredFiles = desired
+	def appendDesiredFiles(self, desired):
+		self.desiredFiles.extend(desired)
 	def onDoubleClick(self, event, row=None, col=None):
 		''' Executed, when a row is double-clicked. Opens 
 		EntryPopup above the item's column, so it is possible
@@ -213,7 +215,8 @@ class Interactive:
 				raise ValueError
 		return (hasLens, vals)
 	def fileRequest(self, files):
-		self.setDesiredFiles(files)
+		self.appendDesiredFiles(files)
+		files=self.desiredFiles
 		self.textbox['text'] = "Unwritten files to be updated: %s%s"%("\n".join(files[:9]), "..." if len(files)>9 else "")
 	def openFiles(self):
 		self.openFilesFromSomeplace(None)
@@ -271,7 +274,7 @@ class Interactive:
 			self.textbox['text']="Errors when updating %s"% ('\n'.join(givenFiles))
 		else:
 			self.textbox['text']="All files updated: %s%s"%("\n".join(givenFiles[:9]), "..." if len(givenFiles)>9 else "")
-
+		self.setDesiredFiles([])
 			
 	def select_record(self, e):
 		camInfoRow=self.my_tree.focus()
