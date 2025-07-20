@@ -29,7 +29,8 @@ def BuildMenus(root, inter, saveablefiles):
 		root.bind_all("<Command-s>", lambda event:inter.saveFiles())
 	file_menu.add_command(label="Open-and-save", command=inter.openFiles, accelerator="Command-O")
 	root.bind_all("<Command-o>", lambda event:inter.openFiles())
-
+	file_menu.add_command(label="Clear file list", command=inter.clearFiles, accelerator="Escape")
+	root.bind_all("<Escape>", lambda event:inter.clearFiles())
 	#Search Menu
 	edit_menu = tkinter.Menu(my_menu, tearoff=0)
 	my_menu.add_cascade(label="Edit", menu=edit_menu)

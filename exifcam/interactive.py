@@ -214,6 +214,9 @@ class Interactive:
 				showerror(title="Save camera information", message="Can't successfully find the cam info for your lens %s %s"%(vals[4],vals[5]))
 				raise ValueError
 		return (hasLens, vals)
+	def clearFiles(self):
+		self.setDesiredFiles([])
+		self.textbox['text'] = "No files to be updated"
 	def fileRequest(self, files):
 		self.appendDesiredFiles(files)
 		files=self.desiredFiles
