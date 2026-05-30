@@ -19,6 +19,8 @@ from .interactive import Interactive
 from .menus import BuildMenus
 from pathlib import Path
 import tkinter
+from tkinter import ttk
+from tkinterdnd2 import DND_FILES, TkinterDnD
 
 from tkinter.messagebox import showerror
 
@@ -26,7 +28,7 @@ appsup = "~/Library/Application Support/ExifCam"
 dbname = "cam.db"
 
 def main():
-	root = tkinter.Tk()
+	root = TkinterDnD.Tk()
 	root.title('camera exif tool')
 	root.geometry("1000x600")
 	
@@ -35,12 +37,19 @@ def main():
 	myappsup.mkdir(parents=True,exist_ok=True)
 	database = str(myappsup / dbname)
 	
-	
+	def handle_drop(event):
+	    # Use splitlist() to correctly handle paths with spaces
+ 	   files = root.tk.splitlist(event.data)
+ 	   inter.fileRequest(files)
+
+ 	
 	db = Db(database)
 	inter = Interactive(root, db)
 	BuildMenus(root, inter, True)
 	root.tk.createcommand("::tk::mac::OpenDocument", lambda *x:inter.fileRequest(x))
-# Run to pull data from database on start
+	root.drop_target_register(DND_FILES)
+	root.dnd_bind('<<Drop>>', handle_drop)
+	# Run to pull data from database on start
 	db.query()
 	cams = db.getCams()
 	lens = db.getLens()
